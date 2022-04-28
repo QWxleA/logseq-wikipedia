@@ -34,7 +34,7 @@ jobs:
         uses: ncipollo/release-action@v1
         id: create_release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          QWIKIPEDIA: ${{ secrets.QWIKIPEDIA }}
           VERSION: ${{ github.ref }}
         with:
           allowUpdates: true
@@ -45,7 +45,7 @@ jobs:
         id: upload_zip
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          QWIKIPEDIA: ${{ secrets.QWIKIPEDIA }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./${{ env.PLUGIN_NAME }}.zip
@@ -56,7 +56,7 @@ jobs:
         id: upload_metadata
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          QWIKIPEDIA: ${{ secrets.QWIKIPEDIA }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./package.json
