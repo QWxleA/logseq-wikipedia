@@ -29,12 +29,11 @@ jobs:
           zip -r ${{ env.PLUGIN_NAME }}.zip ${{ env.PLUGIN_NAME }}
           ls
           echo "::set-output name=tag_name::$(git tag --sort version:refname | tail -n 1)"
-
       - name: Create Release
         uses: ncipollo/release-action@v1
         id: create_release
         env:
-          QWIKIPEDIA: ${{ secrets.QWIKIPEDIA }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ github.ref }}
         with:
           allowUpdates: true
@@ -45,7 +44,7 @@ jobs:
         id: upload_zip
         uses: actions/upload-release-asset@v1
         env:
-          QWIKIPEDIA: ${{ secrets.QWIKIPEDIA }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./${{ env.PLUGIN_NAME }}.zip
@@ -56,7 +55,7 @@ jobs:
         id: upload_metadata
         uses: actions/upload-release-asset@v1
         env:
-          QWIKIPEDIA: ${{ secrets.QWIKIPEDIA }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./package.json
