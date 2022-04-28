@@ -1,6 +1,6 @@
 {
   "name": "logseq-wikipedia",
-  "version": "0.1.1c",
+  "version": "0.1.1d",
   "description": "Logseq Wikipedia",
   "main": "dist/index.html",
   "targets": {
